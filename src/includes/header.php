@@ -18,6 +18,7 @@ if (empty($_SESSION['active'])) {
     <link href="../assets/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
     <link rel="stylesheet" href="../assets/js/jquery-ui/jquery-ui.min.css">
     <script src="../assets/js/all.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="sb-nav-fixed">
@@ -67,11 +68,15 @@ if (empty($_SESSION['active'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Usuarios
                         </a>
-
+                        <a href="#" class="nav-link" data-toggle="modal" data-target="#reporteVentas">
+                            <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
+                            Reporte de Ventas
+                        </a>
                     </div>
                 </div>
             </nav>
         </div>
+        <?php include_once "modal.php"; ?>
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid mt-2">

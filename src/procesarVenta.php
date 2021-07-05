@@ -18,8 +18,10 @@ if ($_POST['user']) {
 	$actualizar = updateStock($productos, $cantidades, $conexion);
 
 	$borrar = deleteDetalles($user, $conexion);
+
+	mysqli_close($conexion);
 	
-	if ($detalles && $actualizar && borrar) {
+	if ($detalles && $actualizar && $borrar) {
 
 		echo json_encode(['success' => 'La venta ha sido procesada.', 'cliente' => $cliente, 'venta' => $venta]);
 
