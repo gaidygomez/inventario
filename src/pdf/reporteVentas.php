@@ -9,25 +9,24 @@ if ($_GET['user'] == '' && $_GET['startDate'] == '' && $_GET['endDate'] == '') {
 	$start = $start_date->format('Y-m-d');
 	$end = $end_date->format('Y-m-d');
 
-	$datos = allData($conexion, $start, $end);
+	$datos = allInvoices($conexion, $start, $end);
 
-	echo $datos;
+	echo json_encode($datos);
 } elseif ($_GET['user'] != '' && $_GET['startDate'] == '' && $_GET['endDate'] == '') {
 	echo json_encode('Datos de hoy del usuario específico');
 } else {
 	echo json_encode('Datos Especificos');
 }
 
-function allData($conexion, $start, $end) {
-	$data = [];
+function allInvoices($conexion, $start, $end) {
 
 	$query = "SELECT v.*, u.nombre as usuario, u.correo, c.nom, c.nombre as cliente, c.telefono 
-	FROM inventario.ventas AS v 
-		INNER JOIN inventario.usuario AS u 
-			ON v.id_usuario = u.idusuario
-		INNER JOIN inventario.cliente as c
-			ON v.id_cliente = c.idcliente 
-	WHERE DATE(fecha) BETWEEN ? AND ?";
+		FROM inventario.ventas AS v 
+			INNER JOIN inventario.usuario AS u 
+				ON v.id_usuario = u.idusuario
+			INNER JOIN inventario.cliente as c
+				ON v.id_cliente = c.idcliente 
+		WHERE DATE(fecha) BETWEEN ? AND ?";
 	
 	$stmt = mysqli_prepare($conexion ,$query);
 
@@ -41,8 +40,8 @@ function allData($conexion, $start, $end) {
 
 	mysqli_close($conexion);
 
-	foreach ($facturas as $key => $factura) {
-		$data[] = [
+	$facturas = array_map(function($factura) {
+		return [
 			'factura' => $factura[0],
 			'total' => $factura[2],
 			'fecha' => $factura[4],
@@ -52,7 +51,18 @@ function allData($conexion, $start, $end) {
 			'cliente_dni' => $factura[8],
 			'cliente_telefono' => $factura[9] 
 		];
-	}
+	}, $facturas);
 
-	return json_encode(['success' => [ 'facturas' => $data ]]);
+	return [ 'facturas' => $facturas ];
 }
+
+function allSumInvoices($conexion, $start, $end) {
+	$query = "SELECT SUM(v.total) 
+	FROM inventario.ventas AS v 
+		INNER JOIN inventario.usuario AS u 
+			ON v.id_usuario = u.idusuario
+		INNER JOIN inventario.cliente as c
+			ON v.id_cliente = c.idcliente 
+	WHERE DATE(fecha) BETWEEN ? AND ?
+	GROUP BY v.id_usuario";
+} 
