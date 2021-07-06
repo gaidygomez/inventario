@@ -38,10 +38,12 @@ function allInvoices($conexion, $start, $end) {
 
 	$facturas = mysqli_fetch_all($datos);
 
+	$total_ventas = allSumInvoices($conexion, $start, $end);
+	
 	mysqli_close($conexion);
 
-	$facturas = array_map(function($factura) {
-		return [
+	foreach ($facturas as $key => $factura) {
+		$data[] = [
 			'factura' => $factura[0],
 			'total' => $factura[2],
 			'fecha' => $factura[4],
@@ -49,15 +51,16 @@ function allInvoices($conexion, $start, $end) {
 			'usuario_correo' => $factura[6],
 			'cliente_nombre' => $factura[7],
 			'cliente_dni' => $factura[8],
-			'cliente_telefono' => $factura[9] 
+			'cliente_telefono' => $factura[9],
+			'total_vendido' => $total_ventas
 		];
-	}, $facturas);
+	}
 
-	return [ 'facturas' => $facturas ];
+	return [ 'facturas' => $data ];
 }
 
 function allSumInvoices($conexion, $start, $end) {
-	$query = "SELECT SUM(v.total) 
+	$query = "SELECT SUM(v.total) as total_vendido, v.id_usuario 
 	FROM inventario.ventas AS v 
 		INNER JOIN inventario.usuario AS u 
 			ON v.id_usuario = u.idusuario
@@ -65,4 +68,21 @@ function allSumInvoices($conexion, $start, $end) {
 			ON v.id_cliente = c.idcliente 
 	WHERE DATE(fecha) BETWEEN ? AND ?
 	GROUP BY v.id_usuario";
+
+	$stmt = mysqli_prepare($conexion ,$query);
+
+	mysqli_stmt_bind_param($stmt, 'ss', $start, $end);
+
+	mysqli_stmt_execute($stmt);
+
+	$datos = mysqli_stmt_get_result($stmt);
+
+	$totales = mysqli_fetch_all($datos);
+
+	return array_map(function ($data) {
+		return [
+			'id' => $data[1],
+			'total' => $data[0]
+		];
+	}, $totales);
 } 

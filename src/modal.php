@@ -2,7 +2,7 @@
 require_once('../conexion.php');
 
 $users = mysqli_fetch_all(mysqli_query($conexion, "SELECT idusuario, nombre, correo, usuario FROM usuario WHERE estado = 1"));
-mysqli_close($conexion);
+
 ?>
 
 <!-- Modal -->

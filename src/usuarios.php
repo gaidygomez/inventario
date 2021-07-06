@@ -88,7 +88,6 @@ if (!empty($_POST)) {
             </tr>
         </thead>
         <tbody>
-            <?php ?>
             <?php
             include "../conexion.php";
 
