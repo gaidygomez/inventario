@@ -41,7 +41,7 @@ pdf.addEventListener('click', () => {
 	$.ajax({
 	  url: 'pdf/reporteVentas.php',
 	  type: 'GET',
-	  dataType: 'json',
+	  xhrFields: {responseType: "blob"},
 	  data: {
 	  	user: user.value,
 	  	startDate: startDate.value,
@@ -51,11 +51,18 @@ pdf.addEventListener('click', () => {
 	    //called when complete
 	  },
 	  success: function(data, textStatus, xhr) {
-	    console.log(data)
+	    // don't set the MIME type to pdf or it will display
+        var blob = new Blob([data], {type: "application/pdf"});
+        // build a blob URL
+        var bloburl = window.URL.createObjectURL(blob);
+        // trigger download for edge
+        var link = $("<a>").attr({href: bloburl, download: "test.pdf"}).click();
+        // trigger download for other browsers
+        window.open(bloburl, '_blank');
+
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
 	    console.error(xhr.responseJSON.error);
 	  }
 	});
-	
 })

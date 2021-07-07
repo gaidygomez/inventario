@@ -1,17 +1,20 @@
 <?php
 require_once "../../conexion.php";
+require_once "./reportes/ventas.php";
 
 $datos = [];
 $start_date = $_GET['startDate'] == '' ? new DateTime() : new DateTime($_GET['startDate']);
 $end_date = $_GET['endDate'] == '' ? new DateTime() : new DateTime($_GET['endDate']);
+$start = $start_date->format('Y-m-d');
+$end = $end_date->format('Y-m-d');
+$state = mysqli_query($conexion, "SELECT * FROM configuracion");
+$config = mysqli_fetch_assoc($state);
 
 if ($_GET['user'] == '' && $_GET['startDate'] == '' && $_GET['endDate'] == '') {
-	$start = $start_date->format('Y-m-d');
-	$end = $end_date->format('Y-m-d');
 
 	$datos = allInvoices($conexion, $start, $end);
 
-	echo json_encode($datos);
+	reporteVentas($datos, $config);
 } elseif ($_GET['user'] != '' && $_GET['startDate'] == '' && $_GET['endDate'] == '') {
 	echo json_encode('Datos de hoy del usuario específico');
 } else {
@@ -39,8 +42,6 @@ function allInvoices($conexion, $start, $end) {
 	$facturas = mysqli_fetch_all($datos);
 
 	$total_ventas = allSumInvoices($conexion, $start, $end);
-	
-	mysqli_close($conexion);
 
 	foreach ($facturas as $key => $factura) {
 		$data[] = [
@@ -52,7 +53,7 @@ function allInvoices($conexion, $start, $end) {
 			'cliente_nombre' => $factura[7],
 			'cliente_dni' => $factura[8],
 			'cliente_telefono' => $factura[9],
-			'total_vendido' => $total_ventas
+			'total_vendido' => totalToUsuer($factura[3], $total_ventas)
 		];
 	}
 
@@ -85,4 +86,13 @@ function allSumInvoices($conexion, $start, $end) {
 			'total' => $data[0]
 		];
 	}, $totales);
+}
+
+function totalToUsuer($user, $array) {
+	foreach ($array as $key => $data) {
+		if ($data['id'] === $user) {
+			return $data['total'];
+		}
+
+	}
 } 

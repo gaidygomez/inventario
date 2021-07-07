@@ -4,7 +4,6 @@ require_once('../conexion.php');
 $users = mysqli_fetch_all(mysqli_query($conexion, "SELECT idusuario, nombre, correo, usuario FROM usuario WHERE estado = 1"));
 
 ?>
-
 <!-- Modal -->
 <div class="modal fade" id="reporteVentas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
