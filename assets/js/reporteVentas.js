@@ -20,18 +20,22 @@ $('#end_date').datepicker({
 
 excel.addEventListener('click', () => {
 	$.ajax({
-	  url: '/path/to/file',
+	  url: 'pdf/reporteXLSX.php',
 	  type: 'GET',
 	  dataType: 'json',
-	  data: {param1: 'value1'},
+	  data: {
+		user: user.value,
+		startDate: startDate.value,
+		endDate: endDate.value
+	  },
 	  complete: function(xhr, textStatus) {
 	    //called when complete
 	  },
 	  success: function(data, textStatus, xhr) {
-	    //called when successful
+	    console.log(data)
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
-	    //called when there is an error
+	    console.error(xhr)
 	  }
 	});
 	
@@ -39,7 +43,7 @@ excel.addEventListener('click', () => {
 
 pdf.addEventListener('click', () => {
 	$.ajax({
-	  url: 'pdf/reporteVentas.php',
+	  url: 'pdf/reportePDF.php',
 	  type: 'GET',
 	  xhrFields: {responseType: "blob"},
 	  data: {
@@ -62,7 +66,13 @@ pdf.addEventListener('click', () => {
 
 	  },
 	  error: function(xhr, textStatus, errorThrown) {
-	    console.error(xhr.responseJSON.error);
+	    Swal.fire({
+			position: 'top-end',
+			icon: 'error',
+			title: 'Un error ha ocurrido',
+			showConfirmButton: false,
+			timer: 2000
+		})
 	  }
 	});
 })

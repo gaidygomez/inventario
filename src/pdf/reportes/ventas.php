@@ -47,12 +47,3 @@ function reporteVentas($datos, $config, $total){
 
 	return $pdf->Output('I', 'Reporte de Ventas', true);
 }
-
-function totalToUsuer($user, $array) {
-	foreach ($array as $key => $data) {
-		if ($data['id'] === $user) {
-			return $data['total'];
-		}
-
-	}
-} 
