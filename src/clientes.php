@@ -9,13 +9,16 @@ if (empty($existe) && $id_user != 1) {
 }
 if (!empty($_POST)) {
     $alert = "";
-    if (empty($_POST['nombre']) || empty($_POST['telefono']) || empty($_POST['direccion'])) {
+    if (empty($_POST['nombre']) || empty($_POST['nom']) || empty($_POST['telefono']) || empty($_POST['ciudad']) ||  empty($_POST['estate']) || empty($_POST['direccion'])) {
         $alert = '<div class="alert alert-danger" role="alert">
                                     Todo los campos son obligatorio
                                 </div>';
     } else {
         $nombre = $_POST['nombre'];
+        $nom = $_POST['nom'];
         $telefono = $_POST['telefono'];
+        $ciudad = $_POST['ciudad'];
+        $estate = $_POST['estate'];
         $direccion = $_POST['direccion'];
         $usuario_id = $_SESSION['idUser'];
 
@@ -27,7 +30,7 @@ if (!empty($_POST)) {
                                     El cliente ya existe
                                 </div>';
         } else {
-            $query_insert = mysqli_query($conexion, "INSERT INTO cliente(nombre,telefono,direccion, usuario_id) values ('$nombre', '$telefono', '$direccion', '$usuario_id')");
+            $query_insert = mysqli_query($conexion, "INSERT INTO cliente(nombre,nom,telefono,ciudad,estate,direccion, usuario_id) values ('$nombre','$nom', '$telefono','$ciudad','$estate', '$direccion', '$usuario_id')");
             if ($query_insert) {
                 $alert = '<div class="alert alert-success" role="alert">
                                     Cliente registrado
@@ -42,7 +45,7 @@ if (!empty($_POST)) {
     mysqli_close($conexion);
 }
 ?>
-<button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nuevo_cliente"><i class="fas fa-plus"></i></button>
+<button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nuevo_cliente"><i class="fas fa-user-plus"></i> Nuevo Cliente </button>
 <?php echo isset($alert) ? $alert : ''; ?>
 <div class="table-responsive">
     <table class="table table-striped table-bordered" id="tbl">
@@ -50,7 +53,10 @@ if (!empty($_POST)) {
             <tr>
                 <th>#</th>
                 <th>Nombre</th>
+                <th>INE</th>
                 <th>Teléfono</th>
+                <th>Ciudad</th>
+                <th>Estado</th>
                 <th>Dirección</th>
                 <th>Estado</th>
                 <th></th>
@@ -73,7 +79,10 @@ if (!empty($_POST)) {
                     <tr>
                         <td><?php echo $data['idcliente']; ?></td>
                         <td><?php echo $data['nombre']; ?></td>
+                        <td><?php echo $data['nom']; ?></td>
                         <td><?php echo $data['telefono']; ?></td>
+                        <td><?php echo $data['ciudad']; ?></td>
+                        <td><?php echo $data['estate']; ?></td>
                         <td><?php echo $data['direccion']; ?></td>
                         <td><?php echo $estado; ?></td>
                         <td>
@@ -107,8 +116,20 @@ if (!empty($_POST)) {
                         <input type="text" placeholder="Ingrese Nombre" name="nombre" id="nombre" class="form-control">
                     </div>
                     <div class="form-group">
+                        <label for="nombre">INE</label>
+                        <input type="text" placeholder="Ingrese INE" name="nom" id="nom" class="form-control">
+                    </div>
+                    <div class="form-group">
                         <label for="telefono">Teléfono</label>
                         <input type="number" placeholder="Ingrese Teléfono" name="telefono" id="telefono" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="ciudad">Ciudad</label>
+                        <input type="text" placeholder="Ingrese ciudad" name="ciudad" id="ciudad" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="ciudad">Estado</label>
+                        <input type="text" placeholder="Ingrese estado" name="estate" id="estate" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="direccion">Dirección</label>

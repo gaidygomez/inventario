@@ -9,7 +9,7 @@ if (empty($existe) && $id_user != 1) {
 }
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
-    $query_delete = mysqli_query($conexion, "UPDATE producto SET estado = 0 WHERE codproducto = $id");
+    $query_delete = mysqli_query($conexion, "DELETE FROM producto WHERE codproducto = $id");
     mysqli_close($conexion);
     header("Location: productos.php");
 }

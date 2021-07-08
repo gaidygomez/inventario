@@ -23,7 +23,7 @@ if (empty($_SESSION['active'])) {
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">Pos Venta</a>
+        <a class="navbar-brand" href="index.php">Myovector</a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
 
         <!-- Navbar-->
@@ -54,6 +54,16 @@ if (empty($_SESSION['active'])) {
                         <a class="nav-link" href="clientes.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Clientes
+                        </a>
+
+                        <a class="nav-link" href="sucursales.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Sucursales
+                        </a>
+
+                        <a class="nav-link" href="stock.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            Stock
                         </a>
 
                         <a class="nav-link" href="lista_ventas.php">

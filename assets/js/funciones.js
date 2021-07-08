@@ -166,7 +166,7 @@ function registrarDetalle(id, precio) {
                         Swal.fire({
                             position: 'top-end',
                             icon: 'success',
-                            title: 'Producto Ingresado',
+                            title: '',
                             showConfirmButton: false,
                             timer: 2000
                         })

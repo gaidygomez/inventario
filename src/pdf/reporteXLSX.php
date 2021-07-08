@@ -16,11 +16,13 @@ $config = mysqli_fetch_assoc($state);
 if ($_GET['user'] == '') {
     $datos = allInvoices($conexion, $start, $end);
 
-    reporteVentas($datos, $config, allSumInvoices($conexion, $start, $end));
+    echo json_encode($datos);
+    //reporteVentas($datos, $config, allSumInvoices($conexion, $start, $end));
 	
 } elseif ($_GET['user'] != '') {
 
 	$datos = invoicesOfUser($conexion, $start, $end, $user);
 
-	reporteVentas($datos, $config, allSumOfUser($conexion, $start, $end, $user));
+    echo json_encode($datos);
+	//reporteVentas($datos, $config, allSumOfUser($conexion, $start, $end, $user));
 }
