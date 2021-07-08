@@ -14,7 +14,8 @@ if ($_GET['user'] == '' && $_GET['startDate'] == '' && $_GET['endDate'] == '') {
 
 	$datos = allInvoices($conexion, $start, $end);
 
-	reporteVentas($datos, $config);
+	reporteVentas($datos, $config, allSumInvoices($conexion, $start, $end));
+	
 } elseif ($_GET['user'] != '' && $_GET['startDate'] == '' && $_GET['endDate'] == '') {
 	echo json_encode('Datos de hoy del usuario específico');
 } else {
@@ -41,26 +42,27 @@ function allInvoices($conexion, $start, $end) {
 
 	$facturas = mysqli_fetch_all($datos);
 
-	$total_ventas = allSumInvoices($conexion, $start, $end);
+	$total_ventas = allSumInvoicesForUser($conexion, $start, $end);
 
 	foreach ($facturas as $key => $factura) {
 		$data[] = [
 			'factura' => $factura[0],
 			'total' => $factura[2],
 			'fecha' => $factura[4],
+			'id_usuario' => $factura[3],
 			'usuario' => $factura[5],
 			'usuario_correo' => $factura[6],
 			'cliente_nombre' => $factura[7],
 			'cliente_dni' => $factura[8],
 			'cliente_telefono' => $factura[9],
-			'total_vendido' => totalToUsuer($factura[3], $total_ventas)
+			'total_vendido' => $total_ventas
 		];
 	}
-
-	return [ 'facturas' => $data ];
+	
+	return $data;
 }
 
-function allSumInvoices($conexion, $start, $end) {
+function allSumInvoicesForUser($conexion, $start, $end) {
 	$query = "SELECT SUM(v.total) as total_vendido, v.id_usuario 
 	FROM inventario.ventas AS v 
 		INNER JOIN inventario.usuario AS u 
@@ -88,11 +90,25 @@ function allSumInvoices($conexion, $start, $end) {
 	}, $totales);
 }
 
-function totalToUsuer($user, $array) {
-	foreach ($array as $key => $data) {
-		if ($data['id'] === $user) {
-			return $data['total'];
-		}
+function allSumInvoices($conexion, $start, $end) {
+	$query = "SELECT SUM(v.total) as total 
+	FROM inventario.ventas AS v 
+		INNER JOIN inventario.usuario AS u 
+			ON v.id_usuario = u.idusuario
+		INNER JOIN inventario.cliente as c
+			ON v.id_cliente = c.idcliente 
+	WHERE DATE(fecha) BETWEEN ? AND ?";
 
-	}
-} 
+	$stmt = mysqli_prepare($conexion ,$query);
+
+	mysqli_stmt_bind_param($stmt, 'ss', $start, $end);
+
+	mysqli_stmt_execute($stmt);
+
+	$datos = mysqli_stmt_get_result($stmt);
+
+	$total = mysqli_fetch_assoc($datos);
+
+	return $total['total'];
+
+}
