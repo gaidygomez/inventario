@@ -4,6 +4,7 @@ $id_user = $_SESSION['idUser'];
 $permiso = "nueva_venta";
 $sql = mysqli_query($conexion, "SELECT p.*, d.* FROM permisos p INNER JOIN detalle_permisos d ON p.id = d.id_permiso WHERE d.id_usuario = $id_user AND p.nombre = '$permiso'");
 $products = mysqli_fetch_all(mysqli_query($conexion, "SELECT codproducto, codigo, descripcion FROM producto"));
+$sucursales = mysqli_fetch_all(mysqli_query($conexion, "SELECT idsucursal, sucursal FROM sucursales WHERE estado = 1"));
 $existe = mysqli_fetch_all($sql);
 if (empty($existe) && $id_user != 1) {
     header("Location: permisos.php");
@@ -64,6 +65,22 @@ if (empty($existe) && $id_user != 1) {
                                         <option value=""> </option>
                                         <?php foreach ($products as $key => $product): ?>
                                             <option value="<?= $product[0] ?>"> <?= $product[2] ?> </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <!-- <input id="producto" class="form-control" type="text" name="producto" placeholder="Ingresa el código o nombre"> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                Seleccione Sucursal
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <select name="sucursal" id="sucursal_venta" class="custom-select">
+                                        <option value=""> </option>
+                                        <?php foreach ($sucursales as $key => $sucursal): ?>
+                                            <option value="<?= $sucursal[0] ?>"> <?= $sucursal[1] ?> </option>
                                         <?php endforeach; ?>
                                     </select>
                                     <!-- <input id="producto" class="form-control" type="text" name="producto" placeholder="Ingresa el código o nombre"> -->

@@ -78,7 +78,7 @@ if (empty($existe) && $id_user != 1) {
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <select name="producto" id="producto" class="custom-select">
+                                    <select name="producto" id="stock_product" class="custom-select">
                                         <option value=""> </option>
                                         <?php foreach ($products as $key => $product): ?>
                                             <option value="<?= $product[0] ?>"> <?= $product[2] ?> </option>
@@ -100,25 +100,18 @@ if (empty($existe) && $id_user != 1) {
                         <th>Id</th>
                         <th>Descripción</th>
                         <th>Cantidad</th>
-                        
-                        <th>Accion</th>
+                        <th>Sucursal</th>
                     </tr>
                 </thead>
-                <tbody id="detalle_venta">
+                <tbody id="table-stock">
 
                 </tbody>
-                <tfoot>
-                    <tr class="font-weight-bold">
-                        <td colspan=3>Descripción</td>
-                        <td id="total"></td>
-                    </tr>
-                </tfoot>
             </table>
 
         </div>
     </div>
     <div class="col-md-6">
-        <a href="#" class="btn btn-primary" id="btn_generar"><i class="fas fa-save"></i> Añadir stock a sucursal</a>
+        <a href="#" class="btn btn-primary" id="generar_stock"><i class="fas fa-save"></i> Añadir stock a sucursal</a>
     </div>
 
 </div>

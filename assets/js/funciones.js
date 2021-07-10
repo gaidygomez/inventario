@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
           dataType: 'json',
           data: {
             user: $('#idcliente').val(),
+            sucursal: $('#sucursal_venta').val(),
             productos: productos,
             cantidades: cantidades,
             precios: precios,

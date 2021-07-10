@@ -2,7 +2,7 @@
 require_once "../conexion.php";
 session_start();
 
-if ($_POST['user']) {
+if ($_POST['user'] && $_POST['sucursal']) {
 
 	$user = $_SESSION['idUser'];
 	$cliente = $_POST['user'];
@@ -10,12 +10,13 @@ if ($_POST['user']) {
 	$cantidades = $_POST['cantidades'];
 	$total = $_POST['total'];
 	$precios = $_POST['precios'];
+	$sucursal = $_POST['sucursal'];
 
 	$venta = insertVenta($cliente, $total, $user, $conexion);
 
 	$detalles = insertDetalleVenta($productos, $venta, $cantidades, $precios, $conexion);
 
-	$actualizar = updateStock($productos, $cantidades, $conexion);
+	$actualizar = updateStock($productos, $sucursal, $cantidades, $conexion);
 
 	$borrar = deleteDetalles($user, $conexion);
 
@@ -35,7 +36,7 @@ if ($_POST['user']) {
 } else {
 	header('Content-type: application/json', true, 422);
 
-	echo json_encode(['error' => 'El Usuario es Requerido']);
+	echo json_encode(['error' => 'El Usuario y la Sucursal son Requeridas']);
 }
 
 function insertVenta($cliente, $total, $user, $conexion) 
@@ -60,10 +61,10 @@ function insertDetalleVenta($productos, $venta, $cantidades, $precios, $conexion
 	return $detalle;
 }
 
-function updateStock($productos, $cantidades, $conexion)
+function updateStock($productos, $sucursal,$cantidades, $conexion)
 {
 	foreach ($productos as $key => $producto) {
-		$query = "UPDATE producto SET existencia = existencia - $cantidades[$key] where codproducto = $producto";
+		$query = "UPDATE producto_sucursales SET cantidad = cantidad - $cantidades[$key] WHERE producto_id = $producto AND sucursal_id = $sucursal";
 
 		$state = mysqli_query($conexion, $query);
 	}
