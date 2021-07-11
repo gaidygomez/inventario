@@ -2,7 +2,7 @@
 require_once "../conexion.php";
 session_start();
 
-if ($_POST['user'] && $_POST['sucursal']) {
+if ($_POST['user'] || $_POST['sucursal']) {
 
 	$user = $_SESSION['idUser'];
 	$cliente = $_POST['user'];
