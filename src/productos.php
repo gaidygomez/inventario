@@ -9,7 +9,7 @@ if (empty($existe) && $id_user != 1) {
 }
     if (!empty($_POST)) {
         $alert = "";
-        if (empty($_POST['codigo']) || empty($_POST['producto']) || empty($_POST['precio']) || $_POST['precio'] <  0 || empty($_POST['preciocom']) || $_POST['preciocom'] <  0 || $_POST['cantidad'] <  0) {
+        if (empty($_POST['codigo']) || empty($_POST['producto']) || empty($_POST['precio']) || $_POST['precio'] <  0 || empty($_POST['preciocom']) || $_POST['preciocom'] <  0 || empty($_POST['sabor'])) {
             $alert = '<div class="alert alert-danger" role="alert">
                 Todo los campos son obligatorios
               </div>';
@@ -18,15 +18,16 @@ if (empty($existe) && $id_user != 1) {
             $producto = $_POST['producto'];
             $preciocom = $_POST['preciocom'];
             $precio = $_POST['precio'];
+            $sabor = $_POST['sabor'];
             $usuario_id = $_SESSION['idUser'];
             $query = mysqli_query($conexion, "SELECT * FROM producto WHERE codigo = '$codigo'");
             $result = mysqli_fetch_array($query);
             if ($result > 0) {
                 $alert = '<div class="alert alert-warning" role="alert">
-                        El código ya existe
+                        El c車digo ya existe
                     </div>';
             } else {
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,preciocom,precio,usuario_id) values ('$codigo', '$producto', '$preciocom', '$precio','$usuario_id')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,preciocom,sabor,precio,usuario_id) values ('$codigo', '$producto', '$preciocom','$sabor', '$precio', '$usuario_id')");
                 if ($query_insert) {
                     $alert = '<div class="alert alert-success" role="alert">
                 Producto Registrado
@@ -40,7 +41,7 @@ if (empty($existe) && $id_user != 1) {
         }
     }
     ?>
-    
+   
  <button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nuevo_producto"><i class="fas fa-plus"></i></button>
  <?php echo isset($alert) ? $alert : ''; ?>
  
@@ -54,7 +55,7 @@ if (empty($existe) && $id_user != 1) {
                  <th>Producto</th>
                  <th>Precio comp.</th>
                  <th>Precio</th>
-                 <!-- <th>Stock</th> -->
+                 <th>Sabor</th>
                  <th>Estado</th>
                  <th></th>
              </tr>
@@ -79,12 +80,15 @@ if (empty($existe) && $id_user != 1) {
                          <td><?php echo $data['descripcion']; ?></td>
                          <td><?php echo $data['preciocom']; ?></td>
                          <td><?php echo $data['precio']; ?></td>
+                         <td><?php echo $data['sabor']; ?></td>
                          <td><?php echo $estado ?></td>
                          <td>
                              <?php if ($data['estado'] == 1) { ?>
                                  <a href="agregar_producto.php?id=<?php echo $data['codproducto']; ?>" class="btn btn-primary"><i class='fas fa-audio-description'></i></a>
 
                                  <a href="editar_producto.php?id=<?php echo $data['codproducto']; ?>" class="btn btn-success"><i class='fas fa-edit'></i></a>
+
+                                 <a href="consulta_stock.php?id=<?php echo $data['codproducto']; ?>" class="btn btn-info"><i class="fas fa-cubes"></i></a>
 
                                  <form action="eliminar_producto.php?id=<?php echo $data['codproducto']; ?>" method="post" class="confirmar d-inline">
                                      <button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
@@ -122,16 +126,10 @@ if (empty($existe) && $id_user != 1) {
                          <label for="producto">Producto</label>
                          <input type="text" placeholder="Ingrese nombre del producto" name="producto" id="producto" class="form-control">
                      </div>
-
-                        <div class="form-group">
-                        <label for="inputSabor">Sabor</label>
-                        <select id="inputSabor" class="form-control">
-                            <option selected>Sabor...</option>
-                            <option>Chocolate</option>
-                            <option>Fresa</option>
-                            <option>Vainilla</option>
-                        </select>
-                        </div>
+                     <div class="form-group">
+                         <label for="producto">Sabor</label>
+                         <input type="text" placeholder="Ingrese el sabor del producto" name="sabor" id="sabor" class="form-control">
+                     </div>
 
                      <div class="form-group">
                          <label for="precio">Precio de compra</label>
@@ -141,6 +139,7 @@ if (empty($existe) && $id_user != 1) {
                          <label for="precio">Precio venta</label>
                          <input type="text" placeholder="Ingrese precio" class="form-control" name="precio" id="precio">
                      </div>
+                     
                      <input type="submit" value="Guardar Producto" class="btn btn-primary">
                  </form>
              </div>
