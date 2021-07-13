@@ -3,8 +3,8 @@ require("../conexion.php");
 $id_user = $_SESSION['idUser'];
 $permiso = "nueva_venta";
 $sql = mysqli_query($conexion, "SELECT p.*, d.* FROM permisos p INNER JOIN detalle_permisos d ON p.id = d.id_permiso WHERE d.id_usuario = $id_user AND p.nombre = '$permiso'");
-$products = mysqli_fetch_all(mysqli_query($conexion, "SELECT codproducto, codigo, descripcion FROM producto"));
-$sucursales = mysqli_fetch_all(mysqli_query($conexion, "SELECT idsucursal, sucursal FROM sucursales WHERE estado = 1"));
+$products = mysqli_fetch_all(mysqli_query($conexion, "SELECT codproducto, codigo, descripcion FROM producto p WHERE EXISTS ( SELECT * FROM producto_sucursales ps WHERE ps.producto_id = p.codproducto )"));
+$sucursales = mysqli_fetch_all(mysqli_query($conexion, "SELECT idsucursal, sucursal FROM sucursales s WHERE estado = 1 AND EXISTS ( SELECT * FROM producto_sucursales ps WHERE ps.sucursal_id = s.idsucursal )"));
 $existe = mysqli_fetch_all($sql);
 if (empty($existe) && $id_user != 1) {
     header("Location: permisos.php");
