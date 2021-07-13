@@ -9,7 +9,7 @@ if (empty($existe) && $id_user != 1) {
 }
     if (!empty($_POST)) {
         $alert = "";
-        if (empty($_POST['codigo']) || empty($_POST['producto']) || empty($_POST['precio']) || $_POST['precio'] <  0 || empty($_POST['preciocom']) || $_POST['preciocom'] <  0 || empty($_POST['cantidad'] || $_POST['cantidad'] <  0)) {
+        if (empty($_POST['codigo']) || empty($_POST['producto']) || empty($_POST['precio']) || $_POST['precio'] <  0 || empty($_POST['preciocom']) || $_POST['preciocom'] <  0 || $_POST['cantidad'] <  0) {
             $alert = '<div class="alert alert-danger" role="alert">
                 Todo los campos son obligatorios
               </div>';
@@ -18,7 +18,6 @@ if (empty($existe) && $id_user != 1) {
             $producto = $_POST['producto'];
             $preciocom = $_POST['preciocom'];
             $precio = $_POST['precio'];
-            $cantidad = $_POST['cantidad'];
             $usuario_id = $_SESSION['idUser'];
             $query = mysqli_query($conexion, "SELECT * FROM producto WHERE codigo = '$codigo'");
             $result = mysqli_fetch_array($query);
@@ -27,7 +26,7 @@ if (empty($existe) && $id_user != 1) {
                         El código ya existe
                     </div>';
             } else {
-                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,preciocom,precio,existencia,usuario_id) values ('$codigo', '$producto', '$preciocom', '$precio', '$cantidad','$usuario_id')");
+                $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,preciocom,precio,usuario_id) values ('$codigo', '$producto', '$preciocom', '$precio','$usuario_id')");
                 if ($query_insert) {
                     $alert = '<div class="alert alert-success" role="alert">
                 Producto Registrado
@@ -55,7 +54,7 @@ if (empty($existe) && $id_user != 1) {
                  <th>Producto</th>
                  <th>Precio comp.</th>
                  <th>Precio</th>
-                 <th>Stock</th>
+                 <!-- <th>Stock</th> -->
                  <th>Estado</th>
                  <th></th>
              </tr>
@@ -80,7 +79,6 @@ if (empty($existe) && $id_user != 1) {
                          <td><?php echo $data['descripcion']; ?></td>
                          <td><?php echo $data['preciocom']; ?></td>
                          <td><?php echo $data['precio']; ?></td>
-                         <td><?php echo $data['existencia']; ?></td>
                          <td><?php echo $estado ?></td>
                          <td>
                              <?php if ($data['estado'] == 1) { ?>
@@ -142,10 +140,6 @@ if (empty($existe) && $id_user != 1) {
                      <div class="form-group">
                          <label for="precio">Precio venta</label>
                          <input type="text" placeholder="Ingrese precio" class="form-control" name="precio" id="precio">
-                     </div>
-                     <div class="form-group">
-                         <label for="cantidad">Cantidad</label>
-                         <input type="number" placeholder="Ingrese cantidad" class="form-control" name="cantidad" id="cantidad">
                      </div>
                      <input type="submit" value="Guardar Producto" class="btn btn-primary">
                  </form>

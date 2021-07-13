@@ -1,11 +1,11 @@
 let productos = []
 
 $('#stock_product').change(function(event) {
-	if ($('#sucursal').val() !== '' && $(this).val() !== '') {
+	if ($('#stock_sucursal').val() !== '' && $(this).val() !== '') {
 
 		productos.push({
-			idsucursal: $('#sucursal').val(),
-			sucursal: $('#sucursal option:selected').text().trim(), 
+			idsucursal: $('#stock_sucursal').val(),
+			sucursal: $('#stock_sucursal option:selected').text().trim(), 
 			idproducto: $(this).val(),
 			producto: $('#stock_product option:selected').text().trim()
 		})
@@ -14,12 +14,12 @@ $('#stock_product').change(function(event) {
 	}
 });
 
-$('#sucursal').change(function(event) {
+$('#stock_sucursal').change(function(event) {
 	if ($('#stock_product').val() !== '' && $(this).val() !== '') {
 
 		productos.push({
 			idsucursal: $(this).val(),
-			sucursal: $('#sucursal option:selected').text().trim(), 
+			sucursal: $('#stock_sucursal option:selected').text().trim(), 
 			idproducto: $('#stock_product').val(),
 			producto: $('#stock_product option:selected').text().trim()
 		})
@@ -108,5 +108,5 @@ function tableStock() {
 
 	$('#stock_product').val('') 
 
-	$('#sucursal').val('')
+	$('#stock_sucursal').val('')
 }

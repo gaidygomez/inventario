@@ -61,7 +61,7 @@ if (empty($existe) && $id_user != 1) {
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <select name="sucursal" id="sucursal" class="custom-select">
+                                    <select name="sucursal" id="stock_sucursal" class="custom-select">
                                         <option value=""> </option>
                                         <?php foreach ($sucursals as $key => $sucursl): ?>
                                             <option value="<?= $sucursl[0] ?>"> <?= $sucursl[2] ?> </option>

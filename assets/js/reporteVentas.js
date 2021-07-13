@@ -4,18 +4,16 @@ let startDate = document.getElementById('start_date');
 let endDate = document.getElementById('end_date');
 let user = document.getElementById('user');
 
-$('#start_date').datepicker({
-    format: "dd/mm/yyyy",
-    language: "es",
-    autoclose: true,
-    startDate: new Date()
+$('#start_date').flatpickr({
+	locale: 'es',
+	dateFormat: 'd-m-Y',
+	allowInput: false
 });
 
-$('#end_date').datepicker({
-    format: "dd/mm/yyyy",
-    language: "es",
-    autoclose: true,
-    startDate: new Date()
+$('#end_date').flatpickr({
+	locale: 'es',
+	dateFormat: 'd-m-Y',
+	allowInput: false
 });
 
 excel.addEventListener('click', () => {

@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     $('#btn_generar').click(function (e) {
         e.preventDefault();
+        
         let codigos = document.querySelectorAll('.codproducto');
         let quantities = document.querySelectorAll('.cantidad');
         let prices = document.querySelectorAll('.precio');
