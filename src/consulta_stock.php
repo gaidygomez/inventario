@@ -6,6 +6,7 @@ $permiso = "productos";
 $sql = mysqli_query($conexion, "SELECT p.*, d.* FROM permisos p INNER JOIN detalle_permisos d ON p.id = d.id_permiso WHERE d.id_usuario = $id_user AND p.nombre = '$permiso'");
 $sucursals = mysqli_fetch_all(mysqli_query($conexion, "SELECT idsucursal, direccion, sucursal FROM sucursales"));
 $existe = mysqli_fetch_all($sql);
+$codproducto = $_GET['id'];
 if (empty($existe) && $id_user != 1) {
   header("Location: permisos.php");
 }
@@ -16,7 +17,6 @@ if (!empty($_POST)) {
               Todo los campos son requeridos
             </div>';
   } else {
-    $codproducto = $_GET['id'];
     $codigo = $_POST['codigo'];
     $producto = $_POST['producto'];
     $precio = $_POST['precio'];
@@ -68,7 +68,8 @@ if (empty($_REQUEST['id'])) {
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <select name="sucursal" id="sucursal" class="custom-select">
+                      <input type="hidden" id="producto_stock" value="<?= $codproducto ?>">
+                        <select name="sucursal" id="sucursal_stock" class="custom-select">
                             <option value=""> </option>
                             <?php foreach ($sucursals as $key => $sucursl): ?>
                                 <option value="<?= $sucursl[0] ?>"> <?= $sucursl[2] ?> </option>
@@ -81,12 +82,12 @@ if (empty($_REQUEST['id'])) {
             </div>
             <div class="col-lg-4">
                 <div class="form-group">
-                    <label>cantidad</label>
-                    <input type="text" name="" id="" class="form-control" disabled required>
+                    <label>Cantidad</label>
+                    <input type="text" name="total_producto" id="total_producto" class="form-control" disabled required>
                 </div>
             </div>
          
-          <input type="submit" value="Actualizar Producto" class="btn btn-primary">
+          <!-- <input type="submit" value="Actualizar Producto" class="btn btn-primary"> -->
           <a href="productos.php" class="btn btn-danger">Atras</a>
         </form>
       </div>

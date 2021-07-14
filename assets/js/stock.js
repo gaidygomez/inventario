@@ -110,3 +110,31 @@ function tableStock() {
 
 	$('#stock_sucursal').val('')
 }
+
+$('#sucursal_stock').change(function(event) {
+
+	$.ajax({
+	  url: 'productosInStock.php',
+	  type: 'POST',
+	  dataType: 'json',
+	  data: {
+	  	sucursal: $('#sucursal_stock').val(),
+	  	producto: $('#producto_stock').val()
+	  },
+	  complete: function(xhr, textStatus) {
+	    //called when complete
+	  },
+	  success: function(data, textStatus, xhr) {
+	    $('#total_producto').val(data.total)
+	  },
+	  error: function(xhr, textStatus, errorThrown) {
+	    Swal.fire({
+			position: 'center',
+			icon: 'error',
+			title: xhr.responseJSON.error,
+			showConfirmButton: false,
+			timer: 2000
+		})
+	  }
+	});
+});

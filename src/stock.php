@@ -74,7 +74,7 @@ if (empty($existe) && $id_user != 1) {
                         </div>
                         <div class="card">
                             <div class="card-header">
-                                seleccione producto
+                                Seleccione Producto
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
