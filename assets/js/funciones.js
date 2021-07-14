@@ -127,7 +127,7 @@ function listar() {
                 html += `
                 <tr>
                 <td>
-                    ${row['id']}
+                    <span class="producto-venta">${row['id']}</span>
                     <input type="hidden" class="codproducto" value="${row['codigo']}">
                 </td>
                 <td>${row['descripcion']}</td>
@@ -271,7 +271,7 @@ function recalcularValores() {
     let cantidades = document.querySelectorAll('.cantidad');
     let precios = document.querySelectorAll('.precio');
     let subtotal = document.querySelectorAll('.subtotal');
-    let codigos = document.querySelectorAll('.codproducto');
+    let codigos = document.querySelectorAll('.producto-venta');
 
     cantidades.forEach((cantidad, key) => {
         cantidad.addEventListener('change', (e) => {
@@ -283,20 +283,14 @@ function recalcularValores() {
                 url: 'updateTemp.php',
                 type: 'POST',
                 data: {
-                    id: codigos[key].value,
+                    id: codigos[key].innerText,
                     qty: e.target.value
                 },
                 success: function(data, textStatus, xhr) {
                     console.log(data)
                 },
                 error: function(xhr, textStatus, errorThrown) {
-                    Swal.fire({
-                        position: 'center',
-                        icon: 'error',
-                        title: xhr.responseJSON.error,
-                        showConfirmButton: false,
-                        timer: 2000
-                    })
+                    console.error(xhr)
                 }
             })
 
@@ -309,6 +303,21 @@ function recalcularValores() {
             let subt = parseFloat(e.target.value) * parseFloat(cantidades[key].value);
 
             subtotal[key].textContent = subt.toFixed(2)
+
+            $.ajax({
+                url: 'updateTemp.php',
+                type: 'POST',
+                data: {
+                    id: codigos[key].innerText,
+                    price: e.target.value
+                },
+                success: function(data, textStatus, xhr) {
+                    console.log(data)
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    console.error(xhr)
+                }
+            })
 
             calcular();
         })
