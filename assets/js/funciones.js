@@ -271,12 +271,34 @@ function recalcularValores() {
     let cantidades = document.querySelectorAll('.cantidad');
     let precios = document.querySelectorAll('.precio');
     let subtotal = document.querySelectorAll('.subtotal');
+    let codigos = document.querySelectorAll('.codproducto');
 
     cantidades.forEach((cantidad, key) => {
         cantidad.addEventListener('change', (e) => {
             let subt = parseFloat(e.target.value) * parseFloat(precios[key].value)
 
             subtotal[key].textContent = subt.toFixed(2);
+
+            $.ajax({
+                url: 'updateTemp.php',
+                type: 'POST',
+                data: {
+                    id: codigos[key].value,
+                    qty: e.target.value
+                },
+                success: function(data, textStatus, xhr) {
+                    console.log(data)
+                },
+                error: function(xhr, textStatus, errorThrown) {
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: xhr.responseJSON.error,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                }
+            })
 
             calcular();
         });
