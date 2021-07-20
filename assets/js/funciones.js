@@ -36,19 +36,55 @@ document.addEventListener("DOMContentLoaded", function () {
             $("#dir_cliente").val(ui.item.direccion);
         }
     })
+
     $("#producto").change(function() {
-        if ($(this).val() != '') {
+        if ($(this).val() != '' && $('#sucursal_venta').val() != '') {
             $.ajax({
-                url: 'ajax.php',
-                async: true,
-                dataType: 'json',
-                data: {
-                    pro: $(this).val()
-                },
-                success: function(res) {
-                    registrarDetalle(res.codproducto, res.precio)
-                }
+              url: 'evaluarStock.php',
+              type: 'GET',
+              dataType: 'json',
+              data: {
+                producto: $(this).val(),
+                sucursal: $('#sucursal_venta').val()
+              },
+              success: function(data, textStatus, xhr) {
+                $.ajax({
+                    url: 'ajax.php',
+                    async: true,
+                    dataType: 'json',
+                    data: {
+                        pro: $('#producto').val()
+                    },
+                    success: function(res) {
+                        registrarDetalle(res.codproducto, res.precio)
+                    }
+                });
+              },
+              error: function(xhr, textStatus, errorThrown) {
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: xhr.responseJSON.error,
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+
+                $('#producto').val('')
+
+                $('#sucursal_venta').val('')
+              }
             });
+            
+        } else {
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: 'Escoja una Sucursal',
+                showConfirmButton: false,
+                timer: 2000
+            })
+
+            $(this).val('')
         }
     });
 

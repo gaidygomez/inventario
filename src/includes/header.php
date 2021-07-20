@@ -3,7 +3,6 @@ if (empty($_SESSION['active'])) {
     header('location: ../');
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 

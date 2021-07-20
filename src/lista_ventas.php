@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 include_once "includes/header.php";
 require_once "../conexion.php";
 $id_user = $_SESSION['idUser'];
@@ -34,4 +36,4 @@ $query = mysqli_query($conexion, "SELECT v.*, c.idcliente, c.nombre FROM ventas 
         <?php } ?>
     </tbody>
 </table>
-<?php include_once "includes/footer.php"; ?>
+<?php include_once "includes/footer.php"; ob_end_flush();?>

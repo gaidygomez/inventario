@@ -1,4 +1,7 @@
-<?php include_once "includes/header.php";
+<?php 
+ob_start();
+
+include_once "includes/header.php";
 include "../conexion.php";
 $id_user = $_SESSION['idUser'];
 $permiso = "sucursales";
@@ -80,4 +83,4 @@ if ($result_sql == 0) {
 
 </div>
 <!-- /.container-fluid -->
-<?php include_once "includes/footer.php"; ?>
+<?php include_once "includes/footer.php"; ob_end_flush(); ?>

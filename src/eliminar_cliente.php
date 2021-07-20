@@ -1,4 +1,6 @@
 <?php
+ob_start();
+
 require("../conexion.php");
 $id_user = $_SESSION['idUser'];
 $permiso = "clientes";
@@ -13,3 +15,5 @@ if (!empty($_GET['id'])) {
     mysqli_close($conexion);
     header("Location: clientes.php");
 }
+
+ob_end_flush();

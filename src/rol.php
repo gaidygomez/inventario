@@ -1,4 +1,7 @@
-<?php include_once "includes/header.php";
+<?php 
+ob_start();
+
+include_once "includes/header.php";
 require_once "../conexion.php";
 $id = $_GET['id'];
 $sqlpermisos = mysqli_query($conexion, "SELECT * FROM permisos");
@@ -29,6 +32,7 @@ if (isset($_POST['permisos'])) {
         }
     }
 }
+
 ?>
 
 <div class="row">
@@ -62,4 +66,4 @@ if (isset($_POST['permisos'])) {
         </div>
     </div>
 </div>
-<?php include_once "includes/footer.php"; ?>
+<?php include_once "includes/footer.php"; ob_end_flush(); ?>

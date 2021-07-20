@@ -1,4 +1,7 @@
-<?php include_once "includes/header.php";
+<?php 
+ob_start();
+
+include_once "includes/header.php";
 require("../conexion.php");
 $id_user = $_SESSION['idUser'];
 $permiso = "nueva_venta";
@@ -115,4 +118,4 @@ if (empty($existe) && $id_user != 1) {
     </div>
 
 </div>
-<?php include_once "includes/footer.php"; ?>
+<?php include_once "includes/footer.php"; ob_end_flush(); ?>
