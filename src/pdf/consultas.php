@@ -76,10 +76,10 @@ function allSumInvoices($conexion, $start, $end) {
 
 function queryAllInvoices() {
 	$query = "SELECT v.*, u.nombre as usuario, u.correo, c.nom, c.nombre as cliente, c.telefono 
-	FROM inventario.ventas AS v 
-		INNER JOIN inventario.usuario AS u 
+	FROM ventas AS v 
+		INNER JOIN usuario AS u 
 			ON v.id_usuario = u.idusuario
-		INNER JOIN inventario.cliente as c
+		INNER JOIN cliente as c
 			ON v.id_cliente = c.idcliente 
 	WHERE DATE(fecha) BETWEEN ? AND ?";
 
@@ -88,10 +88,10 @@ function queryAllInvoices() {
 
 function queryAllSumForUser() {
 	$query = "SELECT SUM(v.total) as total_vendido, v.id_usuario 
-	FROM inventario.ventas AS v 
-		INNER JOIN inventario.usuario AS u 
+	FROM ventas AS v 
+		INNER JOIN usuario AS u 
 			ON v.id_usuario = u.idusuario
-		INNER JOIN inventario.cliente as c
+		INNER JOIN cliente as c
 			ON v.id_cliente = c.idcliente 
 	WHERE DATE(fecha) BETWEEN ? AND ?";
 
@@ -100,10 +100,10 @@ function queryAllSumForUser() {
 
 function allSum() {
 	$query = "SELECT SUM(v.total) as total 
-	FROM inventario.ventas AS v 
-		INNER JOIN inventario.usuario AS u 
+	FROM ventas AS v 
+		INNER JOIN usuario AS u 
 			ON v.id_usuario = u.idusuario
-		INNER JOIN inventario.cliente as c
+		INNER JOIN cliente as c
 			ON v.id_cliente = c.idcliente 
 	WHERE DATE(fecha) BETWEEN ? AND ?";
 
