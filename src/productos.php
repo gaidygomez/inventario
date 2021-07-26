@@ -64,6 +64,15 @@ if (empty($existe) && $id_user != 1) {
          </select>
      </div>
     </div>
+
+    <div class="mb-3" id="reportSucursal" style="display: none;">
+        <div>
+            <button class="btn btn-danger" type="button">
+                <i class="far fa-file-pdf"></i>
+                <span class="mx-1">Sucursal</span>
+            </button>
+        </div>
+    </div>
  <div class="table-responsive">
  
      <table class="table table-striped table-bordered" id="table-productos">

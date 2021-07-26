@@ -24,6 +24,8 @@ $(function() {
 		if ($(this).val() !== '') {
 			$('#info-table').remove()
 
+			$('#reportSucursal').css({display: 'flex'})
+			
 			if ($.fn.DataTable.isDataTable("#table-productos")) {
 			  $('#table-productos').DataTable().clear().destroy();
 			}
@@ -66,12 +68,26 @@ $(function() {
 	                        	</a>
 		                        <form action="eliminar_producto.php?id=${row.id}" method="post" class="confirmar d-inline">
 		                        	<button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
-		                        </form>`
+		                        </form>
+								<button class="btn btn-danger" type="button">
+									<i class="far fa-file-pdf"></i>
+								</button>
+								`
 							}
 						}
 					}
 				]
 			})
+		} else {
+			$('#reportSucursal').css({display: 'none'})
+
+			table.clear().destroy()
+
+			$('tbody').html(`
+			<td colspan="8" class="text-center" id="info-table">
+				Escoja una sucursal
+			</td>
+			`)
 		}
 	});
 });
