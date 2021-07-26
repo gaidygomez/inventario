@@ -67,7 +67,7 @@ if (empty($existe) && $id_user != 1) {
 
     <div class="mb-3" id="reportSucursal" style="display: none;">
         <div>
-            <button class="btn btn-danger" type="button">
+            <button class="btn btn-danger" type="button" id="reporteSucursal">
                 <i class="far fa-file-pdf"></i>
                 <span class="mx-1">Sucursal</span>
             </button>

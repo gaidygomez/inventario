@@ -90,4 +90,31 @@ $(function() {
 			`)
 		}
 	});
+
+	$('#reporteSucursal').click(function(event) {
+		$.ajax({
+		  url: 'pdf/reporteSucursal.php',
+		  type: 'GET',
+		  //dataType: 'json',
+		  xhrFields: {responseType: "blob"},
+		  data: { sucursal: $('#select-products').val() },
+		  complete: function(xhr, textStatus) {
+		    //called when complete
+		  },
+		  success: function(data, textStatus, xhr) {
+    	    // don't set the MIME type to pdf or it will display
+            var blob = new Blob([data], {type: "application/pdf"});
+            // build a blob URL
+            var bloburl = window.URL.createObjectURL(blob);
+            // trigger download for edge
+            var link = $("<a>").attr({href: bloburl, download: "test.pdf"}).click();
+            // trigger download for other browsers
+            window.open(bloburl, '_blank');
+		  },
+		  error: function(xhr, textStatus, errorThrown) {
+		    console.error(xhr)
+		  }
+		});
+		
+	});
 });
