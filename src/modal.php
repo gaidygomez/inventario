@@ -39,7 +39,7 @@ $users = mysqli_fetch_all(mysqli_query($conexion, "SELECT idusuario, nombre, cor
       </div>
       <div class="modal-footer">
         <button type="button" id="pdf" class="btn btn-danger"><i class="far fa-file-pdf"></i> PDF</button>
-        <button type="button" id="excel" class="btn btn-success"><i class="far fa-file-excel"></i> Excel</button>
+        <!-- <button type="button" id="excel" class="btn btn-success"><i class="far fa-file-excel"></i> Excel</button> -->
       </div>
     </div>
   </div>

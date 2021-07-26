@@ -16,7 +16,7 @@ $('#end_date').flatpickr({
 	allowInput: false
 });
 
-excel.addEventListener('click', () => {
+/*excel.addEventListener('click', () => {
 	$.ajax({
 	  url: 'pdf/reporteXLSX.php',
 	  type: 'GET',
@@ -37,7 +37,7 @@ excel.addEventListener('click', () => {
 	  }
 	});
 	
-});
+});*/
 
 pdf.addEventListener('click', () => {
 	$.ajax({

@@ -52,6 +52,7 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script src="https://npmcdn.com/flatpickr@4.6.9/dist/l10n/es.js"></script>
 <script src="../assets/js/reporteVentas.js"></script>
+<script src="../assets/js/productos.js"></script>
 </body>
 
 </html>
