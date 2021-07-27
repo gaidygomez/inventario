@@ -69,9 +69,9 @@ $(function() {
 		                        <form action="eliminar_producto.php?id=${row.id}" method="post" class="confirmar d-inline">
 		                        	<button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
 		                        </form>
-								<button class="btn btn-danger" type="button">
-									<i class="far fa-file-pdf"></i>
-								</button>
+		                        <a href="pdf/reporteProductos.php?producto=${row.id}" target="_blank" class="btn btn-danger">
+		                        	<i class="far fa-file-pdf"></i>
+		                        </a>
 								`
 							}
 						}
