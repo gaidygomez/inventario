@@ -41,7 +41,7 @@ $(function() {
 					{data: 'descripcion', name: 'producto'},
 					{data: 'compra', name: 'compra'},
 					{data: 'precio', name: 'precio'},
-					{data: 'sabor', name: 'sabor'},
+					//{data: 'sabor', name: 'sabor'},
 					{
 						data: 'estado', 
 						name: 'estado',
@@ -56,8 +56,10 @@ $(function() {
 					{
 						render: function (data, type, row) {
 							if (row.estado) {
+								let sucursal = $('#select-products').val();
+
 								return `
-								<a href="agregar_producto.php?id=${row.id}" class="btn btn-primary">
+								<a href="agregar_producto.php?id=${row.id}&sucursal=${sucursal}" class="btn btn-primary">
 									<i class='fas fa-audio-description'></i>
 								</a>
 	                        	<a href="editar_producto.php?id=${row.id}" class="btn btn-success">
@@ -66,7 +68,7 @@ $(function() {
 	                            <a href="consulta_stock.php?id=${row.id}" class="btn btn-info">
 	                            	<i class="fas fa-cubes"></i>
 	                        	</a>
-		                        <form action="eliminar_producto.php?id=${row.id}" method="post" class="confirmar d-inline">
+		                        <form action="eliminar_producto.php?id=${row.id}&sucursal=${sucursal}" method="post" class="confirmar d-inline">
 		                        	<button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
 		                        </form>
 		                        <a href="pdf/reporteProductos.php?producto=${row.id}" target="_blank" class="btn btn-danger">

@@ -11,8 +11,14 @@ if (empty($existe) && $id_user != 1) {
 }
 if (!empty($_GET['id'])) {
     $id = $_GET['id'];
+    $sucursal = $_GET['sucursal'];
+    
     $query_delete = mysqli_query($conexion, "DELETE FROM producto WHERE codproducto = $id");
+
+    $query_sucursal = mysqli_query($conexion, "DELETE FROM producto_sucursales WHERE producto_id = $id AND sucursal_id = $sucursal");
+
     mysqli_close($conexion);
+
     header("Location: productos.php");
 }
 

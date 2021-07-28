@@ -14,6 +14,7 @@ if (empty($_GET['id'])) {
     header("Location: productos.php");
 } else {
     $id_producto = $_GET['id'];
+
     if (!is_numeric($id_producto)) {
         header("Location: productos.php");
     }
@@ -26,9 +27,13 @@ if (!empty($_POST)) {
         $precio = $_POST['precio'];
         $cantidad = $_POST['cantidad'];
         $producto_id = $_GET['id'];
-        $total = $cantidad + $data_producto['existencia'];
-        $query_insert = mysqli_query($conexion, "UPDATE producto SET existencia = $total WHERE codproducto = $id_producto");
-        if ($query_insert) {
+        $sucursal = $_GET['sucursal'];
+
+        $query_insert = mysqli_query($conexion, "UPDATE producto_sucursales SET cantidad = cantidad + $cantidad WHERE producto_id = $producto_id AND sucursal_id = $sucursal");
+
+        $query_price = mysqli_query($conexion, "UPDATE producto SET precio = $precio WHERE codproducto = $producto_id");
+
+        if ($query_insert && $query_price) {
             $alert = '<div class="alert alert-success" role="alert">
                         Stock actualizado
                     </div>';
@@ -58,10 +63,10 @@ if (!empty($_POST)) {
                         <label for="precio">Precio Actual</label>
                         <input type="text" class="form-control" value="<?php echo $data_producto['precio']; ?>" disabled>
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="precio">Cantidad de productos Disponibles</label>
                         <input type="number" class="form-control" value="<?php echo $data_producto['existencia']; ?>" disabled>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <label for="precio">Nuevo Precio</label>
                         <input type="text" placeholder="Ingrese nombre del precio" name="precio" class="form-control" value="<?php echo $data_producto['precio']; ?>">

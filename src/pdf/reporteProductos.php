@@ -51,19 +51,19 @@ if (! isset($_GET['producto']) || $_GET['producto'] == '') {
 	$pdf->SetTextColor(255, 255, 255);
 	$pdf->Cell(196, 5, "Datos del Reporte", 1, 1, 'C', true);
 	$pdf->SetTextColor(0, 0, 0);
-	$pdf->Cell(30, 5, 'Id Producto', 0, 0, 'C');
-	$pdf->Cell(50, 5, utf8_decode('Código'), 0, 0, 'C');
-	$pdf->Cell(30, 5, 'Sabor', 0, 0, 'C');
-	$pdf->Cell(35, 5, 'Cantidad', 0, 0, 'C');
-	$pdf->Cell(50, 5, utf8_decode('Sucursal'), 0, 1, 'C');
+	$pdf->Cell(40, 5, 'Id Producto', 0, 0, 'C');
+	$pdf->Cell(60, 5, utf8_decode('Código'), 0, 0, 'C');
+	//$pdf->Cell(30, 5, 'Sabor', 0, 0, 'C');
+	$pdf->Cell(50, 5, 'Cantidad', 0, 0, 'C');
+	$pdf->Cell(60, 5, utf8_decode('Sucursal'), 0, 1, 'C');
 	$pdf->SetFont('Arial', '', 10);
 
 	foreach ($data as $key => $value) {
-		$pdf->Cell(30, 5, $value['id'], 0, 0, 'C');
-		$pdf->Cell(50, 5, $value['codigo'], 0, 0, 'C');
-		$pdf->Cell(30, 5, $value['sabor'], 0, 0, 'C');
-		$pdf->Cell(35, 5, $value['cantidad'], 0, 0, 'C');
-		$pdf->Cell(50, 5, utf8_decode($value['sucursal']), 0, 1, 'C');
+		$pdf->Cell(40, 5, $value['id'], 0, 0, 'C');
+		$pdf->Cell(60, 5, $value['codigo'], 0, 0, 'C');
+		//$pdf->Cell(30, 5, $value['sabor'], 0, 0, 'C');
+		$pdf->Cell(50, 5, $value['cantidad'], 0, 0, 'C');
+		$pdf->Cell(60, 5, utf8_decode($value['sucursal']), 0, 1, 'C');
 	}
 
 	$pdf->Output('I', 'Reporte de Productos por Sucursal', true);

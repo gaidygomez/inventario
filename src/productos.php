@@ -83,7 +83,7 @@ if (empty($existe) && $id_user != 1) {
                  <th>Producto</th>
                  <th>Precio comp.</th>
                  <th>Precio</th>
-                 <th>Sabor</th>
+                 <!-- <th>Sabor</th> -->
                  <th>Estado</th>
                  <th style="width: 250px;"></th>
              </tr>
