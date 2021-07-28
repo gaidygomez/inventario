@@ -68,7 +68,7 @@ $(function() {
 	                            <a href="consulta_stock.php?id=${row.id}" class="btn btn-info">
 	                            	<i class="fas fa-cubes"></i>
 	                        	</a>
-		                        <form action="eliminar_producto.php?id=${row.id}&sucursal=${sucursal}" method="post" class="confirmar d-inline">
+		                        <form action="eliminar_producto.php?id=${row.id}" method="post" class="confirmar d-inline">
 		                        	<button class="btn btn-danger" type="submit"><i class='fas fa-trash-alt'></i> </button>
 		                        </form>
 		                        <a href="pdf/reporteProductos.php?producto=${row.id}" target="_blank" class="btn btn-danger">
