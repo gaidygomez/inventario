@@ -58,6 +58,24 @@ if (empty($existe) && $id_user != 1) {
                         </div>
                     </div>
                     <div class="col-lg-6">
+                        
+                        <div class="card">
+                            <div class="card-header">
+                                Sucursal
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <select name="sucursal" id="sucursal_venta" class="custom-select">
+                                        <option value="">Seleccione una sucursal</option>
+                                        <?php foreach ($sucursales as $key => $sucursal): ?>
+                                            <option value="<?= $sucursal[0] ?>"> <?= $sucursal[1] ?> </option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                    <!-- <input id="producto" class="form-control" type="text" name="producto" placeholder="Ingresa el código o nombre"> -->
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="card">
                             <div class="card-header">
                                 Buscar Producto
@@ -68,22 +86,6 @@ if (empty($existe) && $id_user != 1) {
                                         <option value=""> </option>
                                         <?php foreach ($products as $key => $product): ?>
                                             <option value="<?= $product[0] ?>"> <?= $product[2] ?> </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                    <!-- <input id="producto" class="form-control" type="text" name="producto" placeholder="Ingresa el código o nombre"> -->
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">
-                                Seleccione Sucursal
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <select name="sucursal" id="sucursal_venta" class="custom-select">
-                                        <option value=""> </option>
-                                        <?php foreach ($sucursales as $key => $sucursal): ?>
-                                            <option value="<?= $sucursal[0] ?>"> <?= $sucursal[1] ?> </option>
                                         <?php endforeach; ?>
                                     </select>
                                     <!-- <input id="producto" class="form-control" type="text" name="producto" placeholder="Ingresa el código o nombre"> -->

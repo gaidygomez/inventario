@@ -292,6 +292,8 @@ function recalcularValores() {
     let precios = document.querySelectorAll('.precio');
     let subtotal = document.querySelectorAll('.subtotal');
     let codigos = document.querySelectorAll('.producto-venta');
+    let productos = document.querySelectorAll('.codproducto');
+    let sucursal = document.getElementById('sucursal_venta');
 
     cantidades.forEach((cantidad, key) => {
         cantidad.addEventListener('change', (e) => {
@@ -304,13 +306,29 @@ function recalcularValores() {
                 type: 'POST',
                 data: {
                     id: codigos[key].innerText,
-                    qty: e.target.value
+                    qty: e.target.value,
+                    sucursal: sucursal.value,
+                    producto: productos[key].value
                 },
                 success: function(data, textStatus, xhr) {
+                    $('#btn_generar').css({
+                        display: 'inline-block'
+                    });
+
                     console.log(data)
                 },
                 error: function(xhr, textStatus, errorThrown) {
-                    console.error(xhr)
+                    $('#btn_generar').css({
+                        display: 'none'
+                    });
+                    
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'info',
+                        title: xhr.responseJSON.error,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
                 }
             })
 

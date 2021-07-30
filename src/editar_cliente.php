@@ -73,7 +73,7 @@ if ($result_sql == 0) {
                             <input type="text" placeholder="Ingrese Direccion" name="direccion" class="form-control" id="direccion" value="<?php echo $direccion; ?>">
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fas fa-user-edit"></i> Editar Cliente</button>
-                        <a href="clientes.php" class="btn btn-danger">Atras</a>
+                        <a href="clientes.php" class="btn btn-danger">Regresar</a>
                     </form>
                 </div>
             </div>

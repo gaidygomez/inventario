@@ -42,7 +42,7 @@ if (!empty($_SESSION['active'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Iniciar Sessión</title>
+    <title>Iniciar Sesión</title>
     <link href="assets/css/styles.css" rel="stylesheet" />
     <script src="assets/js/all.min.js" crossorigin="anonymous"></script>
 </head>
@@ -57,7 +57,7 @@ if (!empty($_SESSION['active'])) {
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 <div class="card-header text-center">
                                     <img class="img-thumbnail" src="assets/img/logo.png" width="100">
-                                    <h3 class="font-weight-light my-4">Iniciar Sessión</h3>
+                                    <h3 class="font-weight-light my-4">Bienvenido al Sistema</h3>
                                 </div>
                                 <div class="card-body">
                                     <form action="" method="POST">
@@ -74,7 +74,7 @@ if (!empty($_SESSION['active'])) {
                                         </div>
                                         <?php echo isset($alert) ? $alert : ''; ?>
                                         <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <button class="btn btn-primary" type="submit">Login</button>
+                                            <button class="btn btn-primary" type="submit">Iniciar Sesión</button>
                                         </div>
                                     </form>
                                 </div>
@@ -88,7 +88,7 @@ if (!empty($_SESSION['active'])) {
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid">
                     <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; <a href="http://angelsifuentes.com/" target="_blank" rel="noopener noreferrer">Visite mi página web</a> <?php echo date("Y"); ?></div>
+                        <div class="text-muted">Copyright &copy; <a href="https://myovectoroficial.com/" target="_blank" rel="noopener noreferrer">Myo-Vector</a> <?php echo date("Y"); ?></div>
                         <div>
                             <a href="#">Privacy Policy</a>
                             &middot;

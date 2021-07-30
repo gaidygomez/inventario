@@ -33,11 +33,11 @@ if (!empty($_POST)) {
             $query_insert = mysqli_query($conexion, "INSERT INTO sucursales(sucursal,direccion,contacto_persona) values ('$sucursal','$direccion','$contacto_persona')");
             if ($query_insert) {
                 $alert = '<div class="alert alert-success" role="alert">
-                                    sucursal registrado
+                                    Sucursal registrada satisfactoriamente.
                                 </div>';
             } else {
                 $alert = '<div class="alert alert-danger" role="alert">
-                                    Error al registrar
+                                    Error al registrar Sucursal.
                             </div>';
             }
         }
@@ -45,7 +45,7 @@ if (!empty($_POST)) {
     mysqli_close($conexion);
 }
 ?>
-<button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nueva_sucursal"><i class="fas fa-user-plus"></i> Nuevo sucursal </button>
+<button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nueva_sucursal"><i class="fas fa-store-alt"></i><i class="fas fa-plus"></i> Nueva Sucursal </button>
 <?php echo isset($alert) ? $alert : ''; ?>
 <div class="table-responsive">
     <table class="table table-striped table-bordered" id="tbl">

@@ -45,7 +45,7 @@ if (isset($_POST['permisos'])) {
                 <form method="post" action="">
                     <?php if(isset($_GET['m']) && $_GET['m'] == 'si') { ?>
                         <div class="alert alert-success" role="alert">
-                            Permisos actualizado
+                            Permisos actualizados satisfactoriamente.
                         </div>
 
                     <?php } ?>
@@ -60,7 +60,10 @@ if (isset($_POST['permisos'])) {
                         </div>
                     <?php } ?>
                     <br>
-                    <button class="btn btn-primary btn-block" type="submit">Modificar</button>
+                    <div>
+                    <button class="btn btn-primary btn-block" type="submit">Modificar</button><a href="usuarios.php" class="btn btn-danger">Regresar</a>
+
+                    </div>
                 </form>
             </div>
         </div>

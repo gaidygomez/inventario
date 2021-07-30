@@ -24,11 +24,11 @@ if (!empty($_POST)) {
     $query_update = mysqli_query($conexion, "UPDATE producto SET codigo = '$codigo', descripcion = '$producto', precio= $precio WHERE codproducto = $codproducto");
     if ($query_update) {
       $alert = '<div class="alert alert-primary" role="alert">
-              Producto Modificado
+              Producto Modificado Satisfactoriamente.
             </div>';
     } else {
       $alert = '<div class="alert alert-primary" role="alert">
-                Error al Modificar
+                Error al Modificar Producto.
               </div>';
     }
   }
@@ -78,7 +78,7 @@ if (empty($_REQUEST['id'])) {
 
           </div>
           <input type="submit" value="Actualizar Producto" class="btn btn-primary">
-          <a href="productos.php" class="btn btn-danger">Atras</a>
+          <a href="productos.php" class="btn btn-danger">Regresar</a>
         </form>
       </div>
     </div>

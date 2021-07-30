@@ -16,6 +16,10 @@ $ventas = mysqli_query($conexion, "SELECT d.*, p.codproducto, p.descripcion FROM
 $pdf->Cell(195, 5, utf8_decode($datos['nombre']), 0, 1, 'C');
 $pdf->image("../../assets/img/logo.png", 180, 10, 30, 30, 'PNG');
 $pdf->SetFont('Arial', 'B', 10);
+$pdf->Cell(20, 5, utf8_decode("Fecha: "), 0, 0, 'L');
+$pdf->SetFont('Arial', '', 10);
+$pdf->Cell(20, 5, date("d/m/y") , 0, 1, 'L');
+$pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(20, 5, utf8_decode("Teléfono: "), 0, 0, 'L');
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(20, 5, $datos['telefono'], 0, 1, 'L');

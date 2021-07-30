@@ -36,11 +36,11 @@ if (empty($existe) && $id_user != 1) {
                 $query_insert = mysqli_query($conexion, "INSERT INTO producto(codigo,descripcion,preciocom,sabor,precio,usuario_id) values ('$codigo', '$producto', '$preciocom','$sabor', '$precio', '$usuario_id')");
                 if ($query_insert) {
                     $alert = '<div class="alert alert-success" role="alert">
-                Producto Registrado
+                Producto Registrado Satisfactoriamente.
               </div>';
                 } else {
                     $alert = '<div class="alert alert-danger" role="alert">
-                Error al registrar el producto
+                Error al registrar el producto.
               </div>';
                 }
             }
@@ -50,26 +50,27 @@ if (empty($existe) && $id_user != 1) {
 
     <div class="d-flex justify-content-between my-3">
         <div class="my-auto">
-             <button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nuevo_producto"><i class="fas fa-plus"></i></button>
+             <button class="btn btn-primary mb-2" type="button" data-toggle="modal" data-target="#nuevo_producto"><i class="fab fa-product-hunt"></i><i class="fas fa-plus"></i> Nuevo Producto</button>
              <?php echo isset($alert) ? $alert : ''; ?>
         </div>
 
-     <div class="form-group">
-        <label for="">Sucursales</label>
+    <div class="d-flex justify-content-between my-3">
+        <label for="">Seleccione una Sucursal</label>
          <select class="custom-select" name="sucursal" id="select-products">
             <option value=""></option>
             <?php foreach($sucursales as $key => $sucursal): ?>
                 <option value="<?= $sucursal[0]; ?>"> <?= $sucursal[1]; ?> </option>
             <?php endforeach; ?>
          </select>
-     </div>
+    </div>
+   
     </div>
 
     <div class="mb-3" id="reportSucursal" style="display: none;">
         <div>
             <button class="btn btn-danger" type="button" id="reporteSucursal">
                 <i class="far fa-file-pdf"></i>
-                <span class="mx-1">Sucursal</span>
+                <span class="mx-1">Inventario de Sucursal</span>
             </button>
         </div>
     </div>

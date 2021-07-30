@@ -27,7 +27,7 @@ if ($_POST) {
         $update = mysqli_query($conexion, "UPDATE configuracion SET nombre = '$nombre', telefono = '$telefono', email = '$email', direccion = '$direccion' WHERE id = $id");
         if ($update) {
             $alert = '<div class="alert alert-success" role="alert">
-            Datos modificado
+            Datos modificados satisfactoriamente.
         </div>';
         }
     }
@@ -62,6 +62,7 @@ if ($_POST) {
                         <?php echo isset($alert) ? $alert : ''; ?>
                         <div>
                             <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Modificar Datos</button>
+                             <a href="index.php" class="btn btn-danger">Inicio</a>
                         </div>
 
                     </form>

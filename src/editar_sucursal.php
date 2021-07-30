@@ -22,9 +22,9 @@ if (!empty($_POST)) {
             $sql_update = mysqli_query($conexion, "UPDATE sucursales SET sucursal = '$sucursal' , contacto_persona = '$contacto', direccion = '$direccion' WHERE idsucursal = $idsucursal");
 
             if ($sql_update) {
-                $alert = '<div class="alert alert-success" role="alert">Cliente Actualizado correctamente</div>';
+                $alert = '<div class="alert alert-success" role="alert">Sucursal Actualizada Satisfactoriamente</div>';
             } else {
-                $alert = '<div class="alert alert-danger" role="alert">Error al Actualizar el Cliente</div>';
+                $alert = '<div class="alert alert-danger" role="alert">Error al Actualizar la Sucursal</div>';
             }
     }
 }
@@ -37,7 +37,7 @@ $idsucursal = $_REQUEST['id'];
 $sql = mysqli_query($conexion, "SELECT * FROM sucursales WHERE idsucursal = $idsucursal");
 $result_sql = mysqli_num_rows($sql);
 if ($result_sql == 0) {
-    header("Location: clientes.php");
+    header("Location: sucursales.php");
 } else {
     if ($data = mysqli_fetch_array($sql)) {
         $idsucursal = $data['idsucursal'];
@@ -66,14 +66,14 @@ if ($result_sql == 0) {
                         </div>
                         <div class="form-group">
                             <label for="telefono">Teléfono</label>
-                            <input type="number" placeholder="Ingrese Teléfono" name="contacto" class="form-control" id="contacto" value="<?php echo $contacto; ?>">
+                            <input type="text" placeholder="Ingrese Teléfono" name="contacto" class="form-control" id="contacto" value="<?php echo $contacto; ?>">
                         </div>
                         <div class="form-group">
                             <label for="direccion">Dirección</label>
                             <input type="text" placeholder="Ingrese Direccion" name="direccion" class="form-control" id="direccion" value="<?php echo $direccion; ?>">
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fas fa-user-edit"></i> Editar Sucursal</button>
-                        <a href="sucursales.php" class="btn btn-danger">Atras</a>
+                        <a href="sucursales.php" class="btn btn-danger">Regresar</a>
                     </form>
                 </div>
             </div>

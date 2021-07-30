@@ -35,11 +35,11 @@ if (!empty($_POST)) {
 
         if ($query_insert && $query_price) {
             $alert = '<div class="alert alert-success" role="alert">
-                        Stock actualizado
+                        Stock Actualizado Satisfactoriamente.
                     </div>';
         } else {
             $alert = '<div class="alert alert-danger" role="alert">
-                        Error al ingresar la cantidad
+                        Error al ingresar la cantidad.
                     </div>';
         }
         mysqli_close($conexion);

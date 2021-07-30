@@ -22,7 +22,7 @@ if (empty($_SESSION['active'])) {
 
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.php">Myovector</a>
+        <a align="center" class="navbar-brand" href="index.php"> <img class="img-thumbnail" src="../assets/img/logo.png" width="100"></a>
         <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
 
         <!-- Navbar-->
@@ -32,7 +32,7 @@ if (empty($_SESSION['active'])) {
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#nuevo_pass">Perfil</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="salir.php">Cerrar Sessión</a>
+                    <a class="dropdown-item" href="salir.php">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>
@@ -42,14 +42,17 @@ if (empty($_SESSION['active'])) {
             <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                 <div class="sb-sidenav-menu">
                     <div class="nav">
-                        <a class="nav-link" href="ventas.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
-                            Nueva venta
-                        </a>
+
                         <a class="nav-link" href="config.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-cogs"></i></div>
-                            Configuración
+                            Datos de la Empresa
                         </a>
+                        
+                        <a class="nav-link" href="usuarios.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
+                            Usuarios
+                        </a>
+                        
                         <a class="nav-link" href="clientes.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Clientes
@@ -59,24 +62,27 @@ if (empty($_SESSION['active'])) {
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Sucursales
                         </a>
+                        
+                        <a class="nav-link" href="productos.php">
+                            <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
+                            Productos
+                        </a>
 
                         <a class="nav-link" href="stock.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Stock
                         </a>
-
+                        
+                        <a class="nav-link" href="ventas.php">
+                            <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
+                            Nueva venta
+                        </a>
+                        
                         <a class="nav-link" href="lista_ventas.php">
                             <div class="sb-nav-link-icon"><i class="fas fa-shopping-cart"></i></div>
                             Ventas
                         </a>
-                        <a class="nav-link" href="productos.php">
-                            <div class="sb-nav-link-icon"><i class="fab fa-product-hunt"></i></div>
-                            Productos
-                        </a>
-                        <a class="nav-link" href="usuarios.php">
-                            <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
-                            Usuarios
-                        </a>
+
                         <a href="#" class="nav-link" data-toggle="modal" data-target="#reporteVentas">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
                             Reporte de Ventas
